@@ -1,0 +1,593 @@
+{
+    "university": "APJ Abdul Kalam Technological University",
+    "scheme": "2024",
+    "semester_total_credits": {
+        "S1": 20,
+        "S2": 24,
+        "S3": 25,
+        "S4": 24,
+        "S5": 23,
+        "S6": 23,
+        "S7": 17,
+        "S8": 11
+    },
+    "curricula": [
+        {
+            "department": "All Branches",
+            "semesters": [
+                {
+                    "semester": 1,
+                    "courses": [
+                        {
+                            "code": "GAMAT101",
+                            "credits": 3
+                        },
+                        {
+                            "code": "GAPHT121",
+                            "credits": 4
+                        },
+                        {
+                            "code": "GXCYT122",
+                            "credits": 4
+                        },
+                        {
+                            "code": "GMEST103",
+                            "credits": 3
+                        },
+                        {
+                            "code": "GXEST104",
+                            "credits": 4
+                        },
+                        {
+                            "code": "UCEST105",
+                            "credits": 4
+                        },
+                        {
+                            "code": "GXESL106",
+                            "credits": 1
+                        },
+                        {
+                            "code": "UCHUT128",
+                            "credits": 1
+                        },
+                        {
+                            "code": "UCHWT128",
+                            "credits": 1
+                        },
+                        {
+                            "code": "UCPWT127",
+                            "credits": 1
+                        },
+                        {
+                            "code": "GYMAT101",
+                            "credits": 3
+                        },
+                        {
+                            "code": "GBPHT121",
+                            "credits": 4
+                        },
+                        {
+                            "code": "GZPHT121",
+                            "credits": 4
+                        },
+                        {
+                            "code": "GCCYT122",
+                            "credits": 4
+                        },
+                        {
+                            "code": "GCEST103",
+                            "credits": 3
+                        },
+                        {
+                            "code": "GCEST104",
+                            "credits": 4
+                        },
+                        {
+                            "code": "GCESL106",
+                            "credits": 1
+                        },
+                        {
+                            "code": "UCSEM129",
+                            "credits": 1
+                        },
+                        {
+                            "code": "GDMAT101",
+                            "credits": 3
+                        },
+                        {
+                            "code": "GDCYT122",
+                            "credits": 4
+                        },
+                        {
+                            "code": "CGMEST103",
+                            "credits": 3
+                        },
+                        {
+                            "code": "GDXXT104",
+                            "credits": 4
+                        },
+                        {
+                            "code": "GDXXL106",
+                            "credits": 1
+                        }
+                    ]
+                },
+                {
+                    "semester": 2,
+                    "courses": [
+                        {
+                            "code": "GAMAT201",
+                            "credits": 3
+                        },
+                        {
+                            "code": "GDMAT201",
+                            "credits": 3
+                        },
+                        {
+                            "code": "GAPHT121",
+                            "credits": 4
+                        },
+                        {
+                            "code": "GXCYT122",
+                            "credits": 4
+                        },
+                        {
+                            "code": "GXEST203",
+                            "credits": 3
+                        },
+                        {
+                            "code": "GXEST204",
+                            "credits": 4
+                        },
+                        {
+                            "code": "PCXXT205",
+                            "credits": 4
+                        },
+                        {
+                            "code": "UCEST206",
+                            "credits": 3
+                        },
+                        {
+                            "code": "UCPWT127",
+                            "credits": 1
+                        },
+                        {
+                            "code": "UCHUT128",
+                            "credits": 1
+                        },
+                        {
+                            "code": "GXESL208",
+                            "credits": 1
+                        },
+                        {
+                            "code": "UCSEM129",
+                            "credits": 1
+                        },
+                        {
+                            "code": "GYMAT201",
+                            "credits": 3
+                        },
+                        {
+                            "code": "GBPHT121",
+                            "credits": 4
+                        },
+                        {
+                            "code": "GXCYT122",
+                            "credits": 4
+                        },
+                        {
+                            "code": "GXEST203",
+                            "credits": 3
+                        },
+                        {
+                            "code": "GBEST204",
+                            "credits": 4
+                        },
+                        {
+                            "code": "GXEST204",
+                            "credits": 4
+                        },
+                        {
+                            "code": "PCXXT204",
+                            "credits": 4
+                        },
+                        {
+                            "code": "PCXXT205",
+                            "credits": 4
+                        },
+                        {
+                            "code": "UCEST206",
+                            "credits": 3
+                        },
+                        {
+                            "code": "UCPWT127",
+                            "credits": 1
+                        },
+                        {
+                            "code": "UCHUT128",
+                            "credits": 1
+                        },
+                        {
+                            "code": "GXESL208",
+                            "credits": 1
+                        },
+                        {
+                            "code": "UCHUT129",
+                            "credits": 1
+                        },
+                        {
+                            "code": "GYMAT201",
+                            "credits": 3
+                        },
+                        {
+                            "code": "GBPHT121",
+                            "credits": 4
+                        },
+                        {
+                            "code": "GCCYT122",
+                            "credits": 4
+                        },
+                        {
+                            "code": "GZEST203",
+                            "credits": 3
+                        },
+                        {
+                            "code": "GCEST204",
+                            "credits": 4
+                        },
+                        {
+                            "code": "PCXXT205",
+                            "credits": 4
+                        },
+                        {
+                            "code": "UCEST206",
+                            "credits": 3
+                        },
+                        {
+                            "code": "UCHUT128",
+                            "credits": 1
+                        },
+                        {
+                            "code": "GZESL208",
+                            "credits": 1
+                        },
+                        {
+                            "code": "GCESL218",
+                            "credits": 1
+                        },
+                        {
+                            "code": "GDMAT201",
+                            "credits": 3
+                        },
+                        {
+                            "code": "GZPHT122",
+                            "credits": 4
+                        },
+                        {
+                            "code": "GDCYT122",
+                            "credits": 4
+                        },
+                        {
+                            "code": "GDESTT203",
+                            "credits": 3
+                        },
+                        {
+                            "code": "GDEST204",
+                            "credits": 4
+                        },
+                        {
+                            "code": "PCXXT205",
+                            "credits": 4
+                        },
+                        {
+                            "code": "UCEST206",
+                            "credits": 3
+                        },
+                        {
+                            "code": "UCHUT128",
+                            "credits": 1
+                        },
+                        {
+                            "code": "UCPWT127",
+                            "credits": 1
+                        },
+                        {
+                            "code": "GZESL208",
+                            "credits": 1
+                        },
+                        {
+                            "code": "UCHWT127",
+                            "credits": 1
+                        },
+                        {
+                            "code": "PCEET205",
+                            "credits": 4
+                        },
+                        {
+                            "code": "GBEST213",
+                            "credits": 3
+                        }
+                    ]
+                },
+                {
+                    "semester": 3,
+                    "courses": [
+                        {
+                            "code": "GYMAT301",
+                            "credits": 3
+                        },
+                        {
+                            "code": "PCXXT302",
+                            "credits": 4
+                        },
+                        {
+                            "code": "PCXXT303",
+                            "credits": 4
+                        },
+                        {
+                            "code": "PBXXT304",
+                            "credits": 4
+                        },
+                        {
+                            "code": "GAEST305",
+                            "credits": 4
+                        },
+                        {
+                            "code": "GNEST305",
+                            "credits": 4
+                        },
+                        {
+                            "code": "UCHUT346",
+                            "credits": 2
+                        },
+                        {
+                            "code": "UCHUT347",
+                            "credits": 2
+                        },
+                        {
+                            "code": "PCXXL307",
+                            "credits": 2
+                        },
+                        {
+                            "code": "PCXXL308",
+                            "credits": 2
+                        }
+                    ]
+                },
+                {
+                    "semester": 4,
+                    "courses": [
+                        {
+                            "code": "GYMAT401",
+                            "credits": 3
+                        },
+                        {
+                            "code": "PCXXT402",
+                            "credits": 4
+                        },
+                        {
+                            "code": "PCXXT403",
+                            "credits": 4
+                        },
+                        {
+                            "code": "PBXXT404",
+                            "credits": 4
+                        },
+                        {
+                            "code": "PEXXT41N",
+                            "credits": 3
+                        },
+                        {
+                            "code": "PCXXL407",
+                            "credits": 2
+                        },
+                        {
+                            "code": "PCXXL408",
+                            "credits": 2
+                        },
+                        {
+                            "code": "UCHUT346",
+                            "credits": 2
+                        },
+                        {
+                            "code": "UCHUT347",
+                            "credits": 2
+                        }
+                    ]
+                },
+                {
+                    "semester": 5,
+                    "courses": [
+                        {
+                            "code": "PCXXT501",
+                            "credits": 4
+                        },
+                        {
+                            "code": "PCXXT502",
+                            "credits": 4
+                        },
+                        {
+                            "code": "PCXXT503",
+                            "credits": 3
+                        },
+                        {
+                            "code": "PBXXT504",
+                            "credits": 4
+                        },
+                        {
+                            "code": "PEXXT52N",
+                            "credits": 3
+                        },
+                        {
+                            "code": "UCHUM506",
+                            "credits": 1
+                        },
+                        {
+                            "code": "PCXXL507",
+                            "credits": 2
+                        },
+                        {
+                            "code": "PCXXL508",
+                            "credits": 2
+                        }
+                    ]
+                },
+                {
+                    "semester": 6,
+                    "courses": [
+                        {
+                            "code": "PCXXT601",
+                            "credits": 4
+                        },
+                        {
+                            "code": "PCXXT602",
+                            "credits": 3
+                        },
+                        {
+                            "code": "PCXXT63N",
+                            "credits": 3
+                        },
+                        {
+                            "code": "PBXXT604",
+                            "credits": 4
+                        },
+                        {
+                            "code": "GAEST605",
+                            "credits": 2
+                        },
+                        {
+                            "code": "GBEST605",
+                            "credits": 1
+                        },
+                        {
+                            "code": "GCEST605",
+                            "credits": 2
+                        },
+                        {
+                            "code": "GDEST605",
+                            "credits": 2
+                        },
+                        {
+                            "code": "OEXXT61N",
+                            "credits": 3
+                        },
+                        {
+                            "code": "IEXXT61N",
+                            "credits": 3
+                        },
+                        {
+                            "code": "PCXXL607",
+                            "credits": 2
+                        },
+                        {
+                            "code": "PCXXP608",
+                            "credits": 2
+                        },
+                        {
+                            "code": "PCXXP609",
+                            "credits": 1
+                        }
+                    ]
+                },
+                {
+                    "semester": 7,
+                    "courses": [
+                        {
+                            "code": "PEXXT74N",
+                            "credits": 3
+                        },
+                        {
+                            "code": "PEXXM74N",
+                            "credits": 3
+                        },
+                        {
+                            "code": "PEXXT75N",
+                            "credits": 3
+                        },
+                        {
+                            "code": "PEXXM75N",
+                            "credits": 3
+                        },
+                        {
+                            "code": "OEXXT72N",
+                            "credits": 3
+                        },
+                        {
+                            "code": "IEXXT72N",
+                            "credits": 3
+                        },
+                        {
+                            "code": "OEXXM72N",
+                            "credits": 3
+                        },
+                        {
+                            "code": "UEHUT704",
+                            "credits": 2
+                        },
+                        {
+                            "code": "UEHUM70N",
+                            "credits": 2
+                        },
+                        {
+                            "code": "PCXXS705",
+                            "credits": 2
+                        },
+                        {
+                            "code": "PCXXP706",
+                            "credits": 4
+                        },
+                        {
+                            "code": "PCXXI706",
+                            "credits": 4
+                        }
+                    ]
+                },
+                {
+                    "semester": 8,
+                    "courses": [
+                        {
+                            "code": "PEXXT86N",
+                            "credits": 3
+                        },
+                        {
+                            "code": "PEXXM86N",
+                            "credits": 3
+                        },
+                        {
+                            "code": "OEXXT83N",
+                            "credits": 3
+                        },
+                        {
+                            "code": "IEXXT83N",
+                            "credits": 3
+                        },
+                        {
+                            "code": "OEXXM83N",
+                            "credits": 3
+                        },
+                        {
+                            "code": "UEHUT803",
+                            "credits": 1
+                        },
+                        {
+                            "code": "UEHUM803",
+                            "credits": 1
+                        },
+                        {
+                            "code": "PCXXP806",
+                            "credits": 4
+                        },
+                        {
+                            "code": "PCXXI806",
+                            "credits": 4
+                        },
+                        {
+                            "code": "PCXXJ806",
+                            "credits": 4
+                        }
+                    ]
+                }
+            ]
+        }
+    ]
+}

@@ -1,0 +1,1711 @@
+{
+    "university": "APJ Abdul Kalam Technological University",
+    "scheme": "2019",
+    "departments": [
+        {
+            "department_name": "Civil Engineering",
+            "semesters": [
+                {
+                    "semester": 1,
+                    "total_credit": 17,
+                    "courses": [
+                        {
+                            "course_code": "MAT 101",
+                            "credit": 4
+                        },
+                        {
+                            "course_code": "PHT 110",
+                            "credit": 4
+                        },
+                        {
+                            "course_code": "CYT 100",
+                            "credit": 4
+                        },
+                        {
+                            "course_code": "EST 100",
+                            "credit": 3
+                        },
+                        {
+                            "course_code": "EST 110",
+                            "credit": 3
+                        },
+                        {
+                            "course_code": "EST 120",
+                            "credit": 4
+                        },
+                        {
+                            "course_code": "EST 130",
+                            "credit": 4
+                        },
+                        {
+                            "course_code": "HUN 101",
+                            "credit": 2
+                        },
+                        {
+                            "course_code": "PHL 120",
+                            "credit": 1
+                        },
+                        {
+                            "course_code": "CYL 120",
+                            "credit": 1
+                        },
+                        {
+                            "course_code": "ESL 120",
+                            "credit": 1
+                        },
+                        {
+                            "course_code": "ESL 130",
+                            "credit": 1
+                        }
+                    ]
+                },
+                {
+                    "semester": 2,
+                    "total_credit": 21,
+                    "courses": [
+                        {
+                            "course_code": "MAT 102",
+                            "credit": 4
+                        },
+                        {
+                            "course_code": "PHT 110",
+                            "credit": 4
+                        },
+                        {
+                            "course_code": "CYT 100",
+                            "credit": 4
+                        },
+                        {
+                            "course_code": "EST 100",
+                            "credit": 3
+                        },
+                        {
+                            "course_code": "EST 110",
+                            "credit": 3
+                        },
+                        {
+                            "course_code": "EST 120",
+                            "credit": 4
+                        },
+                        {
+                            "course_code": "EST 130",
+                            "credit": 4
+                        },
+                        {
+                            "course_code": "HUN 102",
+                            "credit": 2
+                        },
+                        {
+                            "course_code": "EST 102",
+                            "credit": 4
+                        },
+                        {
+                            "course_code": "PHL 120",
+                            "credit": 1
+                        },
+                        {
+                            "course_code": "CYL 120",
+                            "credit": 1
+                        },
+                        {
+                            "course_code": "ESL 120",
+                            "credit": 1
+                        },
+                        {
+                            "course_code": "ESL 130",
+                            "credit": 1
+                        }
+                    ]
+                },
+                {
+                    "semester": 3,
+                    "total_credit": 22,
+                    "courses": [
+                        {
+                            "course_code": "MAT 201",
+                            "credit": 4
+                        },
+                        {
+                            "course_code": "CET 201",
+                            "credit": 4
+                        },
+                        {
+                            "course_code": "CET 203",
+                            "credit": 4
+                        },
+                        {
+                            "course_code": "CET 205",
+                            "credit": 4
+                        },
+                        {
+                            "course_code": "EST 200",
+                            "credit": 2
+                        },
+                        {
+                            "course_code": "HUT 200",
+                            "credit": 2
+                        },
+                        {
+                            "course_code": "MCN 201",
+                            "credit": 0
+                        },
+                        {
+                            "course_code": "CEL 201",
+                            "credit": 2
+                        },
+                        {
+                            "course_code": "CEL 203",
+                            "credit": 2
+                        }
+                    ]
+                },
+                {
+                    "semester": 4,
+                    "total_credit": 22,
+                    "courses": [
+                        {
+                            "course_code": "MAT 202",
+                            "credit": 4
+                        },
+                        {
+                            "course_code": "CET 202",
+                            "credit": 4
+                        },
+                        {
+                            "course_code": "CET 204",
+                            "credit": 4
+                        },
+                        {
+                            "course_code": "CET 206",
+                            "credit": 4
+                        },
+                        {
+                            "course_code": "EST 200",
+                            "credit": 2
+                        },
+                        {
+                            "course_code": "HUT 200",
+                            "credit": 2
+                        },
+                        {
+                            "course_code": "MCN 202",
+                            "credit": 0
+                        },
+                        {
+                            "course_code": "CEL 202",
+                            "credit": 2
+                        },
+                        {
+                            "course_code": "CEL 204",
+                            "credit": 2
+                        }
+                    ]
+                },
+                {
+                    "semester": 5,
+                    "total_credit": 23,
+                    "courses": [
+                        {
+                            "course_code": "CET 301",
+                            "credit": 4
+                        },
+                        {
+                            "course_code": "CET 303",
+                            "credit": 4
+                        },
+                        {
+                            "course_code": "CET 305",
+                            "credit": 4
+                        },
+                        {
+                            "course_code": "CET 307",
+                            "credit": 4
+                        },
+                        {
+                            "course_code": "CET 309",
+                            "credit": 3
+                        },
+                        {
+                            "course_code": "MCN 301",
+                            "credit": 0
+                        },
+                        {
+                            "course_code": "CEL 331",
+                            "credit": 2
+                        },
+                        {
+                            "course_code": "CEL 333",
+                            "credit": 2
+                        }
+                    ]
+                },
+                {
+                    "semester": 6,
+                    "total_credit": 23,
+                    "courses": [
+                        {
+                            "course_code": "CET 302",
+                            "credit": 4
+                        },
+                        {
+                            "course_code": "CET 304",
+                            "credit": 4
+                        },
+                        {
+                            "course_code": "CET 306",
+                            "credit": 4
+                        },
+                        {
+                            "course_code": "CET XXX",
+                            "credit": 3
+                        },
+                        {
+                            "course_code": "HUT 300",
+                            "credit": 3
+                        },
+                        {
+                            "course_code": "CET 308",
+                            "credit": 1
+                        },
+                        {
+                            "course_code": "CEL 332",
+                            "credit": 2
+                        },
+                        {
+                            "course_code": "CEL 334",
+                            "credit": 2
+                        }
+                    ]
+                },
+                {
+                    "semester": 7,
+                    "total_credit": 15,
+                    "courses": [
+                        {
+                            "course_code": "CET 401",
+                            "credit": 3
+                        },
+                        {
+                            "course_code": "CET XXX",
+                            "credit": 3
+                        },
+                        {
+                            "course_code": "CET XXX",
+                            "credit": 3
+                        },
+                        {
+                            "course_code": "MCN 401",
+                            "credit": 0
+                        },
+                        {
+                            "course_code": "CEL 411",
+                            "credit": 2
+                        },
+                        {
+                            "course_code": "CEQ 413",
+                            "credit": 2
+                        },
+                        {
+                            "course_code": "CED 415",
+                            "credit": 2
+                        }
+                    ]
+                },
+                {
+                    "semester": 8,
+                    "total_credit": 17,
+                    "courses": [
+                        {
+                            "course_code": "CET 402",
+                            "credit": 3
+                        },
+                        {
+                            "course_code": "CET XXX",
+                            "credit": 3
+                        },
+                        {
+                            "course_code": "CET XXX",
+                            "credit": 3
+                        },
+                        {
+                            "course_code": "CET XXX",
+                            "credit": 3
+                        },
+                        {
+                            "course_code": "CET 404",
+                            "credit": 1
+                        },
+                        {
+                            "course_code": "CED 416",
+                            "credit": 4
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "department_name": "Computer Science and Engineering",
+            "semesters": [
+                {
+                    "semester": 1,
+                    "total_credit": 17,
+                    "courses": [
+                        {
+                            "course_code": "MAT 101",
+                            "credit": 4
+                        },
+                        {
+                            "course_code": "PHT 100",
+                            "credit": 4
+                        },
+                        {
+                            "course_code": "CYT 100",
+                            "credit": 4
+                        },
+                        {
+                            "course_code": "EST 100",
+                            "credit": 3
+                        },
+                        {
+                            "course_code": "EST 110",
+                            "credit": 3
+                        },
+                        {
+                            "course_code": "EST 120",
+                            "credit": 4
+                        },
+                        {
+                            "course_code": "EST 130",
+                            "credit": 4
+                        },
+                        {
+                            "course_code": "HUN 101",
+                            "credit": 2
+                        },
+                        {
+                            "course_code": "PHL 120",
+                            "credit": 1
+                        },
+                        {
+                            "course_code": "CYL 120",
+                            "credit": 1
+                        },
+                        {
+                            "course_code": "ESL 120",
+                            "credit": 1
+                        },
+                        {
+                            "course_code": "ESL 130",
+                            "credit": 1
+                        }
+                    ]
+                },
+                {
+                    "semester": 2,
+                    "total_credit": 21,
+                    "courses": [
+                        {
+                            "course_code": "MAT 102",
+                            "credit": 4
+                        },
+                        {
+                            "course_code": "PHT 100",
+                            "credit": 4
+                        },
+                        {
+                            "course_code": "CYT 100",
+                            "credit": 4
+                        },
+                        {
+                            "course_code": "EST 100",
+                            "credit": 3
+                        },
+                        {
+                            "course_code": "EST 110",
+                            "credit": 3
+                        },
+                        {
+                            "course_code": "EST 120",
+                            "credit": 4
+                        },
+                        {
+                            "course_code": "EST 130",
+                            "credit": 4
+                        },
+                        {
+                            "course_code": "HUN 102",
+                            "credit": 2
+                        },
+                        {
+                            "course_code": "EST 102",
+                            "credit": 4
+                        },
+                        {
+                            "course_code": "PHL 120",
+                            "credit": 1
+                        },
+                        {
+                            "course_code": "CYL 120",
+                            "credit": 1
+                        },
+                        {
+                            "course_code": "ESL 120",
+                            "credit": 1
+                        },
+                        {
+                            "course_code": "ESL 130",
+                            "credit": 1
+                        }
+                    ]
+                },
+                {
+                    "semester": 3,
+                    "total_credit": 22,
+                    "courses": [
+                        {
+                            "course_code": "MAT 203",
+                            "credit": 4
+                        },
+                        {
+                            "course_code": "CST 201",
+                            "credit": 4
+                        },
+                        {
+                            "course_code": "CST 203",
+                            "credit": 4
+                        },
+                        {
+                            "course_code": "CST 205",
+                            "credit": 4
+                        },
+                        {
+                            "course_code": "EST 200",
+                            "credit": 2
+                        },
+                        {
+                            "course_code": "HUT 200",
+                            "credit": 2
+                        },
+                        {
+                            "course_code": "MCN 201",
+                            "credit": 0
+                        },
+                        {
+                            "course_code": "CSL 201",
+                            "credit": 2
+                        },
+                        {
+                            "course_code": "CSL 203",
+                            "credit": 2
+                        }
+                    ]
+                },
+                {
+                    "semester": 4,
+                    "total_credit": 22,
+                    "courses": [
+                        {
+                            "course_code": "MAT 206",
+                            "credit": 4
+                        },
+                        {
+                            "course_code": "CST 202",
+                            "credit": 4
+                        },
+                        {
+                            "course_code": "CST 204",
+                            "credit": 4
+                        },
+                        {
+                            "course_code": "CST 206",
+                            "credit": 4
+                        },
+                        {
+                            "course_code": "EST 200",
+                            "credit": 2
+                        },
+                        {
+                            "course_code": "HUT 200",
+                            "credit": 2
+                        },
+                        {
+                            "course_code": "MCN 202",
+                            "credit": 0
+                        },
+                        {
+                            "course_code": "CSL 202",
+                            "credit": 2
+                        },
+                        {
+                            "course_code": "CSL 204",
+                            "credit": 2
+                        }
+                    ]
+                },
+                {
+                    "semester": 5,
+                    "total_credit": 23,
+                    "courses": [
+                        {
+                            "course_code": "CST 301",
+                            "credit": 4
+                        },
+                        {
+                            "course_code": "CST 303",
+                            "credit": 4
+                        },
+                        {
+                            "course_code": "CST 305",
+                            "credit": 4
+                        },
+                        {
+                            "course_code": "CST 307",
+                            "credit": 4
+                        },
+                        {
+                            "course_code": "CST 309",
+                            "credit": 3
+                        },
+                        {
+                            "course_code": "MCN 301",
+                            "credit": 0
+                        },
+                        {
+                            "course_code": "CSL 331",
+                            "credit": 2
+                        },
+                        {
+                            "course_code": "CSL 333",
+                            "credit": 2
+                        }
+                    ]
+                },
+                {
+                    "semester": 6,
+                    "total_credit": 23,
+                    "courses": [
+                        {
+                            "course_code": "CST 302",
+                            "credit": 4
+                        },
+                        {
+                            "course_code": "CST 304",
+                            "credit": 4
+                        },
+                        {
+                            "course_code": "CST 306",
+                            "credit": 4
+                        },
+                        {
+                            "course_code": "CST XXX",
+                            "credit": 3
+                        },
+                        {
+                            "course_code": "HUT 300",
+                            "credit": 3
+                        },
+                        {
+                            "course_code": "CST 308",
+                            "credit": 1
+                        },
+                        {
+                            "course_code": "CSL 332",
+                            "credit": 2
+                        },
+                        {
+                            "course_code": "CSD 334",
+                            "credit": 2
+                        }
+                    ]
+                },
+                {
+                    "semester": 7,
+                    "total_credit": 15,
+                    "courses": [
+                        {
+                            "course_code": "CST 401",
+                            "credit": 3
+                        },
+                        {
+                            "course_code": "CST XXX",
+                            "credit": 3
+                        },
+                        {
+                            "course_code": "CST XXX",
+                            "credit": 3
+                        },
+                        {
+                            "course_code": "MCN 401",
+                            "credit": 0
+                        },
+                        {
+                            "course_code": "CSL 411",
+                            "credit": 2
+                        },
+                        {
+                            "course_code": "CSQ 413",
+                            "credit": 2
+                        },
+                        {
+                            "course_code": "CSD 415",
+                            "credit": 2
+                        }
+                    ]
+                },
+                {
+                    "semester": 8,
+                    "total_credit": 17,
+                    "courses": [
+                        {
+                            "course_code": "CST 402",
+                            "credit": 3
+                        },
+                        {
+                            "course_code": "CST XXX",
+                            "credit": 3
+                        },
+                        {
+                            "course_code": "CST XXX",
+                            "credit": 3
+                        },
+                        {
+                            "course_code": "CST XXX",
+                            "credit": 3
+                        },
+                        {
+                            "course_code": "CST 404",
+                            "credit": 1
+                        },
+                        {
+                            "course_code": "CSD 416",
+                            "credit": 4
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "department_name": "Electronics & Communication Engineering",
+            "semesters": [
+                {
+                    "semester": 1,
+                    "total_credit": 17,
+                    "courses": [
+                        {
+                            "course_code": "MAT 101",
+                            "credit": 4
+                        },
+                        {
+                            "course_code": "PHT 100",
+                            "credit": 4
+                        },
+                        {
+                            "course_code": "CYT 100",
+                            "credit": 4
+                        },
+                        {
+                            "course_code": "EST 100",
+                            "credit": 3
+                        },
+                        {
+                            "course_code": "EST 110",
+                            "credit": 3
+                        },
+                        {
+                            "course_code": "EST 120",
+                            "credit": 4
+                        },
+                        {
+                            "course_code": "EST 130",
+                            "credit": 4
+                        },
+                        {
+                            "course_code": "HUN 101",
+                            "credit": 2
+                        },
+                        {
+                            "course_code": "PHL 120",
+                            "credit": 1
+                        },
+                        {
+                            "course_code": "CYL 120",
+                            "credit": 1
+                        },
+                        {
+                            "course_code": "ESL 120",
+                            "credit": 1
+                        },
+                        {
+                            "course_code": "ESL 130",
+                            "credit": 1
+                        }
+                    ]
+                },
+                {
+                    "semester": 2,
+                    "total_credit": 21,
+                    "courses": [
+                        {
+                            "course_code": "MAT 102",
+                            "credit": 4
+                        },
+                        {
+                            "course_code": "PHT 100",
+                            "credit": 4
+                        },
+                        {
+                            "course_code": "CYT 100",
+                            "credit": 4
+                        },
+                        {
+                            "course_code": "EST 100",
+                            "credit": 3
+                        },
+                        {
+                            "course_code": "EST 110",
+                            "credit": 3
+                        },
+                        {
+                            "course_code": "EST 120",
+                            "credit": 4
+                        },
+                        {
+                            "course_code": "EST 130",
+                            "credit": 4
+                        },
+                        {
+                            "course_code": "HUN 102",
+                            "credit": 2
+                        },
+                        {
+                            "course_code": "EST 102",
+                            "credit": 4
+                        },
+                        {
+                            "course_code": "PHL 120",
+                            "credit": 1
+                        },
+                        {
+                            "course_code": "CYL 120",
+                            "credit": 1
+                        },
+                        {
+                            "course_code": "ESL 120",
+                            "credit": 1
+                        },
+                        {
+                            "course_code": "ESL 130",
+                            "credit": 1
+                        }
+                    ]
+                },
+                {
+                    "semester": 3,
+                    "total_credit": 22,
+                    "courses": [
+                        {
+                            "course_code": "MAT 201",
+                            "credit": 4
+                        },
+                        {
+                            "course_code": "ECT 201",
+                            "credit": 4
+                        },
+                        {
+                            "course_code": "ECT 203",
+                            "credit": 4
+                        },
+                        {
+                            "course_code": "ECT 205",
+                            "credit": 4
+                        },
+                        {
+                            "course_code": "EST 200",
+                            "credit": 2
+                        },
+                        {
+                            "course_code": "HUT 200",
+                            "credit": 2
+                        },
+                        {
+                            "course_code": "MCN 201",
+                            "credit": 0
+                        },
+                        {
+                            "course_code": "ECL 201",
+                            "credit": 2
+                        },
+                        {
+                            "course_code": "ECL 203",
+                            "credit": 2
+                        }
+                    ]
+                },
+                {
+                    "semester": 4,
+                    "total_credit": 22,
+                    "courses": [
+                        {
+                            "course_code": "MAT 204",
+                            "credit": 4
+                        },
+                        {
+                            "course_code": "ECT 202",
+                            "credit": 4
+                        },
+                        {
+                            "course_code": "ECT 204",
+                            "credit": 4
+                        },
+                        {
+                            "course_code": "ECT 206",
+                            "credit": 4
+                        },
+                        {
+                            "course_code": "EST 200",
+                            "credit": 2
+                        },
+                        {
+                            "course_code": "HUT 200",
+                            "credit": 2
+                        },
+                        {
+                            "course_code": "MCN 202",
+                            "credit": 0
+                        },
+                        {
+                            "course_code": "ECL 202",
+                            "credit": 2
+                        },
+                        {
+                            "course_code": "ECL 204",
+                            "credit": 2
+                        }
+                    ]
+                },
+                {
+                    "semester": 5,
+                    "total_credit": 23,
+                    "courses": [
+                        {
+                            "course_code": "ECT 301",
+                            "credit": 4
+                        },
+                        {
+                            "course_code": "ECT 303",
+                            "credit": 4
+                        },
+                        {
+                            "course_code": "ECT 305",
+                            "credit": 4
+                        },
+                        {
+                            "course_code": "ECT 307",
+                            "credit": 4
+                        },
+                        {
+                            "course_code": "HUT 300",
+                            "credit": 3
+                        },
+                        {
+                            "course_code": "MCN 301",
+                            "credit": 0
+                        },
+                        {
+                            "course_code": "ECL 331",
+                            "credit": 2
+                        },
+                        {
+                            "course_code": "ECL 333",
+                            "credit": 2
+                        }
+                    ]
+                },
+                {
+                    "semester": 6,
+                    "total_credit": 23,
+                    "courses": [
+                        {
+                            "course_code": "ECT 302",
+                            "credit": 4
+                        },
+                        {
+                            "course_code": "ECT 304",
+                            "credit": 4
+                        },
+                        {
+                            "course_code": "ECT 306",
+                            "credit": 4
+                        },
+                        {
+                            "course_code": "ECT XXX",
+                            "credit": 3
+                        },
+                        {
+                            "course_code": "HUT 310",
+                            "credit": 3
+                        },
+                        {
+                            "course_code": "ECT 308",
+                            "credit": 1
+                        },
+                        {
+                            "course_code": "ECL 332",
+                            "credit": 2
+                        },
+                        {
+                            "course_code": "ECD 334",
+                            "credit": 2
+                        }
+                    ]
+                },
+                {
+                    "semester": 7,
+                    "total_credit": 15,
+                    "courses": [
+                        {
+                            "course_code": "ECT 401",
+                            "credit": 3
+                        },
+                        {
+                            "course_code": "ECT XXX",
+                            "credit": 3
+                        },
+                        {
+                            "course_code": "ECT XXX",
+                            "credit": 3
+                        },
+                        {
+                            "course_code": "MCN 401",
+                            "credit": 0
+                        },
+                        {
+                            "course_code": "ECL 411",
+                            "credit": 2
+                        },
+                        {
+                            "course_code": "ECQ 413",
+                            "credit": 2
+                        },
+                        {
+                            "course_code": "ECD 415",
+                            "credit": 2
+                        }
+                    ]
+                },
+                {
+                    "semester": 8,
+                    "total_credit": 17,
+                    "courses": [
+                        {
+                            "course_code": "ECT 402",
+                            "credit": 3
+                        },
+                        {
+                            "course_code": "ECT XXX",
+                            "credit": 3
+                        },
+                        {
+                            "course_code": "ECT XXX",
+                            "credit": 3
+                        },
+                        {
+                            "course_code": "ECT XXX",
+                            "credit": 3
+                        },
+                        {
+                            "course_code": "ECT 404",
+                            "credit": 1
+                        },
+                        {
+                            "course_code": "ECD 416",
+                            "credit": 4
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "department_name": "Electrical & Electronics Engineering",
+            "semesters": [
+                {
+                    "semester": 1,
+                    "total_credit": 17,
+                    "courses": [
+                        {
+                            "course_code": "MAT 101",
+                            "credit": 4
+                        },
+                        {
+                            "course_code": "PHT 100",
+                            "credit": 4
+                        },
+                        {
+                            "course_code": "CYT 100",
+                            "credit": 4
+                        },
+                        {
+                            "course_code": "EST 100",
+                            "credit": 3
+                        },
+                        {
+                            "course_code": "EST 110",
+                            "credit": 3
+                        },
+                        {
+                            "course_code": "EST 120",
+                            "credit": 4
+                        },
+                        {
+                            "course_code": "EST 130",
+                            "credit": 4
+                        },
+                        {
+                            "course_code": "HUN 101",
+                            "credit": 2
+                        },
+                        {
+                            "course_code": "PHL 120",
+                            "credit": 1
+                        },
+                        {
+                            "course_code": "CYL 120",
+                            "credit": 1
+                        },
+                        {
+                            "course_code": "ESL 120",
+                            "credit": 1
+                        },
+                        {
+                            "course_code": "ESL 130",
+                            "credit": 1
+                        }
+                    ]
+                },
+                {
+                    "semester": 2,
+                    "total_credit": 21,
+                    "courses": [
+                        {
+                            "course_code": "MAT 102",
+                            "credit": 4
+                        },
+                        {
+                            "course_code": "PHT 100",
+                            "credit": 4
+                        },
+                        {
+                            "course_code": "CYT 100",
+                            "credit": 4
+                        },
+                        {
+                            "course_code": "EST 100",
+                            "credit": 3
+                        },
+                        {
+                            "course_code": "EST 110",
+                            "credit": 3
+                        },
+                        {
+                            "course_code": "EST 120",
+                            "credit": 4
+                        },
+                        {
+                            "course_code": "EST 130",
+                            "credit": 4
+                        },
+                        {
+                            "course_code": "HUN 102",
+                            "credit": 2
+                        },
+                        {
+                            "course_code": "EST 102",
+                            "credit": 4
+                        },
+                        {
+                            "course_code": "PHL 120",
+                            "credit": 1
+                        },
+                        {
+                            "course_code": "CYL 120",
+                            "credit": 1
+                        },
+                        {
+                            "course_code": "ESL 120",
+                            "credit": 1
+                        },
+                        {
+                            "course_code": "ESL 130",
+                            "credit": 1
+                        }
+                    ]
+                },
+                {
+                    "semester": 3,
+                    "total_credit": 22,
+                    "courses": [
+                        {
+                            "course_code": "MAT 201",
+                            "credit": 4
+                        },
+                        {
+                            "course_code": "EET 201",
+                            "credit": 4
+                        },
+                        {
+                            "course_code": "EET 203",
+                            "credit": 4
+                        },
+                        {
+                            "course_code": "EET 205",
+                            "credit": 4
+                        },
+                        {
+                            "course_code": "EST 200",
+                            "credit": 2
+                        },
+                        {
+                            "course_code": "HUT 200",
+                            "credit": 2
+                        },
+                        {
+                            "course_code": "MCN 201",
+                            "credit": 0
+                        },
+                        {
+                            "course_code": "EEL 201",
+                            "credit": 2
+                        },
+                        {
+                            "course_code": "EEL 203",
+                            "credit": 2
+                        }
+                    ]
+                },
+                {
+                    "semester": 4,
+                    "total_credit": 22,
+                    "courses": [
+                        {
+                            "course_code": "MAT 204",
+                            "credit": 4
+                        },
+                        {
+                            "course_code": "EET 202",
+                            "credit": 4
+                        },
+                        {
+                            "course_code": "EET 204",
+                            "credit": 4
+                        },
+                        {
+                            "course_code": "EET 206",
+                            "credit": 4
+                        },
+                        {
+                            "course_code": "EST 200",
+                            "credit": 2
+                        },
+                        {
+                            "course_code": "HUT 200",
+                            "credit": 2
+                        },
+                        {
+                            "course_code": "MCN 202",
+                            "credit": 0
+                        },
+                        {
+                            "course_code": "EEL 202",
+                            "credit": 2
+                        },
+                        {
+                            "course_code": "EEL 204",
+                            "credit": 2
+                        }
+                    ]
+                },
+                {
+                    "semester": 5,
+                    "total_credit": 23,
+                    "courses": [
+                        {
+                            "course_code": "EET 301",
+                            "credit": 4
+                        },
+                        {
+                            "course_code": "EET 303",
+                            "credit": 4
+                        },
+                        {
+                            "course_code": "EET 305",
+                            "credit": 4
+                        },
+                        {
+                            "course_code": "EET 307",
+                            "credit": 4
+                        },
+                        {
+                            "course_code": "HUT 300",
+                            "credit": 3
+                        },
+                        {
+                            "course_code": "MCN 301",
+                            "credit": 0
+                        },
+                        {
+                            "course_code": "EEL 331",
+                            "credit": 2
+                        },
+                        {
+                            "course_code": "EEL 333",
+                            "credit": 2
+                        }
+                    ]
+                },
+                {
+                    "semester": 6,
+                    "total_credit": 23,
+                    "courses": [
+                        {
+                            "course_code": "EET 302",
+                            "credit": 4
+                        },
+                        {
+                            "course_code": "EET 304",
+                            "credit": 4
+                        },
+                        {
+                            "course_code": "EET 306",
+                            "credit": 4
+                        },
+                        {
+                            "course_code": "EET XXX",
+                            "credit": 3
+                        },
+                        {
+                            "course_code": "HUT 310",
+                            "credit": 3
+                        },
+                        {
+                            "course_code": "EET 308",
+                            "credit": 1
+                        },
+                        {
+                            "course_code": "EEL 332",
+                            "credit": 2
+                        },
+                        {
+                            "course_code": "EEL 334",
+                            "credit": 2
+                        }
+                    ]
+                },
+                {
+                    "semester": 7,
+                    "total_credit": 15,
+                    "courses": [
+                        {
+                            "course_code": "EET 401",
+                            "credit": 3
+                        },
+                        {
+                            "course_code": "EET XXX",
+                            "credit": 3
+                        },
+                        {
+                            "course_code": "EET XXX",
+                            "credit": 3
+                        },
+                        {
+                            "course_code": "MCN 401",
+                            "credit": 0
+                        },
+                        {
+                            "course_code": "EEL 411",
+                            "credit": 2
+                        },
+                        {
+                            "course_code": "EEQ 413",
+                            "credit": 2
+                        },
+                        {
+                            "course_code": "EED 415",
+                            "credit": 2
+                        }
+                    ]
+                },
+                {
+                    "semester": 8,
+                    "total_credit": 17,
+                    "courses": [
+                        {
+                            "course_code": "EET 402",
+                            "credit": 3
+                        },
+                        {
+                            "course_code": "EET XXX",
+                            "credit": 3
+                        },
+                        {
+                            "course_code": "EET XXX",
+                            "credit": 3
+                        },
+                        {
+                            "course_code": "EET XXX",
+                            "credit": 3
+                        },
+                        {
+                            "course_code": "EET 404",
+                            "credit": 1
+                        },
+                        {
+                            "course_code": "EED 416",
+                            "credit": 4
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "department_name": "Mechanical Engineering",
+            "semesters": [
+                {
+                    "semester": 1,
+                    "total_credit": 17,
+                    "courses": [
+                        {
+                            "course_code": "MAT 101",
+                            "credit": 4
+                        },
+                        {
+                            "course_code": "PHT 110",
+                            "credit": 4
+                        },
+                        {
+                            "course_code": "CYT 100",
+                            "credit": 4
+                        },
+                        {
+                            "course_code": "EST 100",
+                            "credit": 3
+                        },
+                        {
+                            "course_code": "EST 110",
+                            "credit": 3
+                        },
+                        {
+                            "course_code": "EST 120",
+                            "credit": 4
+                        },
+                        {
+                            "course_code": "EST 130",
+                            "credit": 4
+                        },
+                        {
+                            "course_code": "HUN 101",
+                            "credit": 2
+                        },
+                        {
+                            "course_code": "PHL 120",
+                            "credit": 1
+                        },
+                        {
+                            "course_code": "CYL 120",
+                            "credit": 1
+                        },
+                        {
+                            "course_code": "ESL 120",
+                            "credit": 1
+                        },
+                        {
+                            "course_code": "ESL 130",
+                            "credit": 1
+                        }
+                    ]
+                },
+                {
+                    "semester": 2,
+                    "total_credit": 21,
+                    "courses": [
+                        {
+                            "course_code": "MAT 102",
+                            "credit": 4
+                        },
+                        {
+                            "course_code": "PHT 110",
+                            "credit": 4
+                        },
+                        {
+                            "course_code": "CYT 100",
+                            "credit": 4
+                        },
+                        {
+                            "course_code": "EST 100",
+                            "credit": 3
+                        },
+                        {
+                            "course_code": "EST 110",
+                            "credit": 3
+                        },
+                        {
+                            "course_code": "EST 120",
+                            "credit": 4
+                        },
+                        {
+                            "course_code": "EST 130",
+                            "credit": 4
+                        },
+                        {
+                            "course_code": "HUN 102",
+                            "credit": 2
+                        },
+                        {
+                            "course_code": "EST 102",
+                            "credit": 4
+                        },
+                        {
+                            "course_code": "PHL 120",
+                            "credit": 1
+                        },
+                        {
+                            "course_code": "CYL 120",
+                            "credit": 1
+                        },
+                        {
+                            "course_code": "ESL 120",
+                            "credit": 1
+                        },
+                        {
+                            "course_code": "ESL 130",
+                            "credit": 1
+                        }
+                    ]
+                },
+                {
+                    "semester": 3,
+                    "total_credit": 22,
+                    "courses": [
+                        {
+                            "course_code": "MAT 201",
+                            "credit": 4
+                        },
+                        {
+                            "course_code": "MET 201",
+                            "credit": 4
+                        },
+                        {
+                            "course_code": "MET 203",
+                            "credit": 4
+                        },
+                        {
+                            "course_code": "MET 205",
+                            "credit": 4
+                        },
+                        {
+                            "course_code": "EST 200",
+                            "credit": 2
+                        },
+                        {
+                            "course_code": "HUT 200",
+                            "credit": 2
+                        },
+                        {
+                            "course_code": "MCN 201",
+                            "credit": 0
+                        },
+                        {
+                            "course_code": "MEL 201",
+                            "credit": 2
+                        },
+                        {
+                            "course_code": "MEL 203",
+                            "credit": 2
+                        }
+                    ]
+                },
+                {
+                    "semester": 4,
+                    "total_credit": 22,
+                    "courses": [
+                        {
+                            "course_code": "MAT 202",
+                            "credit": 4
+                        },
+                        {
+                            "course_code": "MET 202",
+                            "credit": 4
+                        },
+                        {
+                            "course_code": "MET 204",
+                            "credit": 4
+                        },
+                        {
+                            "course_code": "MET 206",
+                            "credit": 4
+                        },
+                        {
+                            "course_code": "EST 200",
+                            "credit": 2
+                        },
+                        {
+                            "course_code": "HUT 200",
+                            "credit": 2
+                        },
+                        {
+                            "course_code": "MCN 202",
+                            "credit": 0
+                        },
+                        {
+                            "course_code": "MEL 202",
+                            "credit": 2
+                        },
+                        {
+                            "course_code": "MEL 204",
+                            "credit": 2
+                        }
+                    ]
+                },
+                {
+                    "semester": 5,
+                    "total_credit": 23,
+                    "courses": [
+                        {
+                            "course_code": "MET 301",
+                            "credit": 4
+                        },
+                        {
+                            "course_code": "MET 303",
+                            "credit": 4
+                        },
+                        {
+                            "course_code": "MET 305",
+                            "credit": 4
+                        },
+                        {
+                            "course_code": "MET 307",
+                            "credit": 4
+                        },
+                        {
+                            "course_code": "HUT 300",
+                            "credit": 3
+                        },
+                        {
+                            "course_code": "MCN 301",
+                            "credit": 0
+                        },
+                        {
+                            "course_code": "MEL 331",
+                            "credit": 2
+                        },
+                        {
+                            "course_code": "MEL 333",
+                            "credit": 2
+                        }
+                    ]
+                },
+                {
+                    "semester": 6,
+                    "total_credit": 23,
+                    "courses": [
+                        {
+                            "course_code": "MET 302",
+                            "credit": 4
+                        },
+                        {
+                            "course_code": "MET 304",
+                            "credit": 4
+                        },
+                        {
+                            "course_code": "MET 306",
+                            "credit": 4
+                        },
+                        {
+                            "course_code": "MET XXX",
+                            "credit": 3
+                        },
+                        {
+                            "course_code": "HUT 310",
+                            "credit": 3
+                        },
+                        {
+                            "course_code": "MET 308",
+                            "credit": 1
+                        },
+                        {
+                            "course_code": "MEL 332",
+                            "credit": 2
+                        },
+                        {
+                            "course_code": "MEL 334",
+                            "credit": 2
+                        }
+                    ]
+                },
+                {
+                    "semester": 7,
+                    "total_credit": 15,
+                    "courses": [
+                        {
+                            "course_code": "MET 401",
+                            "credit": 3
+                        },
+                        {
+                            "course_code": "MET XXX",
+                            "credit": 3
+                        },
+                        {
+                            "course_code": "MET XXX",
+                            "credit": 3
+                        },
+                        {
+                            "course_code": "MCN 401",
+                            "credit": 0
+                        },
+                        {
+                            "course_code": "MEL 411",
+                            "credit": 2
+                        },
+                        {
+                            "course_code": "MEQ 413",
+                            "credit": 2
+                        },
+                        {
+                            "course_code": "MED 415",
+                            "credit": 2
+                        }
+                    ]
+                },
+                {
+                    "semester": 8,
+                    "total_credit": 17,
+                    "courses": [
+                        {
+                            "course_code": "MET 402",
+                            "credit": 3
+                        },
+                        {
+                            "course_code": "MET XXX",
+                            "credit": 3
+                        },
+                        {
+                            "course_code": "MET XXX",
+                            "credit": 3
+                        },
+                        {
+                            "course_code": "MET XXX",
+                            "credit": 3
+                        },
+                        {
+                            "course_code": "MET 404",
+                            "credit": 1
+                        },
+                        {
+                            "course_code": "MED 416",
+                            "credit": 4
+                        }
+                    ]
+                }
+            ]
+        }
+    ]
+}
