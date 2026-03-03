@@ -1,4 +1,4 @@
-import { useState, useRef, useCallback } from 'react'
+import { useState, useRef, useCallback, useEffect } from 'react'
 import Dashboard from './components/Dashboard'
 import './App.css'
 
@@ -109,7 +109,28 @@ function App() {
     const handleReset = () => {
         setAnalysisResult(null);
         setFile(null);
+        // when navigating back from dashboard we should also pop the history entry
+        if (window.history.state && window.history.state.dashboard) {
+            window.history.back();
+        }
     }
+
+    // push a history entry when analysis result is shown so browser back works
+    useEffect(() => {
+        if (analysisResult) {
+            // add a dummy state to track dashboard view
+            window.history.pushState({ dashboard: true }, 'Analytics');
+
+            const onPop = (evt) => {
+                // if user hits back while in dashboard, reset the app
+                if (analysisResult) {
+                    handleReset();
+                }
+            };
+            window.addEventListener('popstate', onPop);
+            return () => window.removeEventListener('popstate', onPop);
+        }
+    }, [analysisResult]);
 
     return (
         <div className="app-container">

@@ -5,23 +5,21 @@ import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContaine
 export default function Dashboard({ data, onReset }) {
     const [activeTab, setActiveTab] = useState(0);
 
-    const triggerDownload = () => {
-        if (!data?.excelBase64) return;
-
+    // helper: trigger download from base64 with given filename
+    const triggerDownload = (base64Data, filename) => {
+        if (!base64Data) return;
         try {
-            const byteString = atob(data.excelBase64);
+            const byteString = atob(base64Data);
             const ab = new ArrayBuffer(byteString.length);
             const ia = new Uint8Array(ab);
             for (let i = 0; i < byteString.length; i++) {
                 ia[i] = byteString.charCodeAt(i);
             }
             const blob = new Blob([ab], { type: 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet' });
-
             const url = window.URL.createObjectURL(blob);
             const link = document.createElement('a');
             link.href = url;
-            const dateStr = new Date().toISOString().split('T')[0];
-            link.download = `KTU_Results_${dateStr}.xlsx`;
+            link.download = filename;
             document.body.appendChild(link);
             link.click();
             link.remove();
@@ -52,11 +50,31 @@ export default function Dashboard({ data, onReset }) {
                     </button>
                     <h2 className="title dashboard-title">Analytics</h2>
                 </div>
-                <button className="analyze-btn download-btn" onClick={triggerDownload} style={{ width: 'auto' }}>
-                    <Download size={18} />
-                    Download Excel
-                </button>
+                <div style={{ display: 'flex', gap: '0.5rem' }}>
+                    <button className="analyze-btn download-btn" onClick={() => {
+                        const dateStr = new Date().toISOString().split('T')[0];
+                        triggerDownload(data.excelBase64, `KTU_Results_${dateStr}.xlsx`);
+                    }} style={{ width: 'auto' }}>
+                        <Download size={18} />
+                        Download Excel
+                    </button>
+                    {data?.supplementaryExcelBase64 && (
+                        <button className="analyze-btn download-btn" onClick={() => {
+                            const dateStr = new Date().toISOString().split('T')[0];
+                            triggerDownload(data.supplementaryExcelBase64, `KTU_Supplementary_${dateStr}.xlsx`);
+                        }} style={{ width: 'auto' }}>
+                            <Download size={18} />
+                            Download Supplementary
+                        </button>
+                    )}
+                </div>
             </header>
+
+            {data?.supplementaryCount ? (
+                <div className="supplementary-note" style={{ padding: '0 1rem 0.5rem', color: '#fbbf24' }}>
+                    {data.supplementaryCount} supplementary student{data.supplementaryCount > 1 ? 's' : ''} were excluded from the regular analysis.
+                </div>
+            ) : null}
 
             <div className="dashboard-tabs">
                 {departments.map((dept, idx) => (
