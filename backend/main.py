@@ -249,6 +249,31 @@ def extract_and_analyze(pdf_bytes: bytes):
         if not credit_lookup:
             print(f"WARNING: credit lookup is empty (scheme {detected_scheme}). check {credits_path}")
 
+        # --- Handle Multiple Electives Selection ---
+        # In some schemes/semesters (like S6 2019), multiple electives might be listed.
+        # If a student passes at least one elective in a group, the failed ones in that group
+        # are ignored and do not affect their pass/fail status or total credits.
+        ELECTIVE_GROUPS = [
+            {"ECT352", "ECT362", "ECT372", "ECT374", "ECT376", "ECT378", "ECT382", "ECT384"},
+            {"CST342", "CST352", "CSL362", "CST362", "CST372"},
+            {"EET312", "EET322", "EET332"},
+            {"CET312", "CET322", "CET332", "CET342", "CET352", "CET362"}
+        ]
+        
+        all_students_lists = list(reg_dept.values()) + list(supp_dept.values())
+        for students in all_students_lists:
+            for student in students:
+                for group in ELECTIVE_GROUPS:
+                    courses_in_grp = [c for c in group if c in student]
+                    if len(courses_in_grp) > 1:
+                        # Check if passed at least one
+                        passed_any = any(str(student[c]).upper() not in ['F', 'FE', 'ABSENT', 'DEBARRED', 'I', 'WITHHELD'] for c in courses_in_grp)
+                        if passed_any:
+                            # Remove the failing ones so they don't count as arrear or fail the student
+                            for c in courses_in_grp:
+                                if str(student[c]).upper() in ['F', 'FE', 'ABSENT', 'DEBARRED', 'I', 'WITHHELD']:
+                                    del student[c]
+
         # Calculate Results Post-Extraction
         for dept, students in departments_data.items():
             for student in students:
@@ -293,35 +318,245 @@ def extract_and_analyze(pdf_bytes: bytes):
     if not departments_data:
         raise ValueError("Could not extract any results from the PDF.")
 
-    # generate workbook for regular students only
-    reg_excel = io.BytesIO()
-    with pd.ExcelWriter(reg_excel, engine='openpyxl') as writer:
-        for dept, students in dept_buckets.items():
+    from openpyxl.styles import PatternFill, Font, Alignment, Border, Side
+    from openpyxl.utils import get_column_letter
+
+    # Calculate Arrears for all students
+    for dept, students in list(reg_dept.items()) + list(supp_dept.items()):
+        for student in students:
+            arrear_count = 0
+            for course, grade in student.items():
+                if course in ['Student ID', 'Result', 'SGPA', 'Arrear']:
+                    continue
+                if str(grade).upper() in ['F', 'FE', 'ABSENT', 'DEBARRED', 'I', 'WITHHELD']:
+                    arrear_count += 1
+            student['Arrear'] = arrear_count
+
+    # Define Styles
+    header_fill = PatternFill(start_color="1F497D", end_color="1F497D", fill_type="solid")
+    header_font = Font(color="FFFFFF", bold=True, size=12)
+    green_fill = PatternFill(start_color="92D050", end_color="92D050", fill_type="solid")
+    yellow_fill = PatternFill(start_color="FFC000", end_color="FFC000", fill_type="solid")
+    orange_fill = PatternFill(start_color="ED7D31", end_color="ED7D31", fill_type="solid")
+    black_font = Font(color="000000", bold=True, size=11)
+    red_font_bold = Font(color="FF0000", bold=True)
+    red_font_italic = Font(color="FF0000", italic=True)
+    center_align = Alignment(horizontal="center", vertical="center")
+    thin_border = Border(left=Side(style='thin'), right=Side(style='thin'), 
+                         top=Side(style='thin'), bottom=Side(style='thin'))
+
+    inst_match = re.search(r'Exam\s*Centre:\s*(.+)', full_text, re.IGNORECASE)
+    if inst_match:
+        college_name = "Exam Centre: " + inst_match.group(1).strip()
+    else:
+        college_name = full_text.split('\n')[0].strip() if full_text else "INSTITUTION"
+        if "APJ ABDUL KALAM" in college_name and len(full_text.split('\n')) > 1:
+            college_name = "Exam Centre: " + full_text.split('\n')[1].strip()
+
+    excel_buffer = io.BytesIO()
+    with pd.ExcelWriter(excel_buffer, engine='openpyxl') as writer:
+        for dept, students in reg_dept.items():
             if not students:
                 continue
+                
             df = pd.DataFrame(students)
-
-            # analytics for this department
+            
+            # Organize columns
+            base_cols = ['Student ID']
+            end_cols = ['SGPA', 'Arrear']
+            # Find all courses
+            courses = [c for c in df.columns if c not in base_cols + end_cols + ['Result']]
+            # Fill missing grades with '-'
+            for c in courses:
+                if c not in df:
+                    df[c] = '-'
+                else:
+                    df[c] = df[c].fillna('-')
+            
+            if 'SGPA' not in df: df['SGPA'] = 'N/A'
+            if 'Arrear' not in df: df['Arrear'] = 0
+            
+            # Format SGPA
+            df['SGPA'] = df['SGPA'].apply(lambda x: f"{x:.2f}" if isinstance(x, (int, float)) and x != 0 else 'N/A')
+            
+            cols = base_cols + courses + end_cols
+            df = df[cols]
+            
+            # Sort by Register Number
+            df = df.sort_values(by=['Student ID']).reset_index(drop=True)
+            
+            # Analytics for Regular Students only
             dept_total = len(df)
-            dept_passed = len(df[df['Result'] == 'PASS'])
+            dept_passed = len(df[df['Result'] == 'PASS']) if not df.empty and 'Result' in df else 0
             dept_failed = dept_total - dept_passed
             dept_pass_percentage = round((dept_passed / dept_total) * 100, 2) if dept_total > 0 else 0
-
-            # subject stats (exclude SGPA column)
-            courses = [c for c in df.columns if c not in ['Student ID', 'Result', 'SGPA']]
-            subject_stats = []
-            for course in courses:
-                course_grades = df[course].dropna()
-                fails = course_grades.isin(['F', 'FE', 'Absent', 'Debarred']).sum()
-                passes = len(course_grades) - fails
-                subject_stats.append({
-                    "subject": course,
-                    "passed": int(passes),
-                    "failed": int(fails)
-                })
-
+            
             total_students += dept_total
             total_passed += dept_passed
+            
+            # Write to Excel, starting from row 8 (row 7 is empty)
+            df.to_excel(writer, sheet_name=dept[:31], index=False, startrow=7)
+            
+            workbook = writer.book
+            worksheet = writer.sheets[dept[:31]]
+            
+            max_col = len(cols)
+            max_col_letter = get_column_letter(max_col)
+            
+            # --- Headers (Rows 1-6) ---
+            worksheet.merge_cells(f"A1:{max_col_letter}1")
+            cell = worksheet["A1"]
+            cell.value = "KTU RESULT ANALYSER"
+            cell.fill = header_fill
+            cell.font = Font(color="FFFFFF", bold=True, size=14)
+            cell.alignment = center_align
+            
+            worksheet.merge_cells(f"A2:{max_col_letter}2")
+            cell = worksheet["A2"]
+            cell.value = f"{exam_name} ({detected_scheme} Scheme) ({detected_semester} Result)"
+            cell.fill = green_fill
+            cell.font = black_font
+            cell.alignment = center_align
+            
+            worksheet.merge_cells(f"A3:{max_col_letter}3")
+            cell = worksheet["A3"]
+            cell.value = f"Department: {dept}"
+            cell.fill = yellow_fill
+            cell.font = black_font
+            cell.alignment = center_align
+            
+            worksheet.merge_cells(f"A4:{max_col_letter}4")
+            cell = worksheet["A4"]
+            cell.value = college_name
+            cell.fill = yellow_fill
+            cell.font = black_font
+            cell.alignment = center_align
+            
+            worksheet.merge_cells(f"A5:{max_col_letter}5")
+            cell = worksheet["A5"]
+            cell.value = f"Total Regular Students: {len(students)}"
+            cell.fill = yellow_fill
+            cell.font = black_font
+            cell.alignment = center_align
+            
+            worksheet.merge_cells(f"A6:{max_col_letter}6")
+            cell = worksheet["A6"]
+            cell.value = "Note: Table shows REGULAR students only."
+            cell.font = red_font_italic
+            cell.alignment = center_align
+            
+            # Format Table Headers (Row 8)
+            for col_num in range(1, max_col + 1):
+                cell = worksheet.cell(row=8, column=col_num)
+                if cell.value == "Student ID": cell.value = "Register No"
+                cell.fill = header_fill
+                cell.font = header_font
+                cell.alignment = center_align
+                cell.border = thin_border
+                
+            # Format Data Rows (Row 9 onwards)
+            fail_grades = ['F', 'FE', 'ABSENT', 'DEBARRED', 'I', 'WITHHELD']
+            for row_num in range(9, 9 + len(df)):
+                for col_num in range(1, max_col + 1):
+                    cell = worksheet.cell(row=row_num, column=col_num)
+                    cell.alignment = center_align
+                    cell.border = thin_border
+                    val = str(cell.value).strip().upper()
+                    if val in fail_grades:
+                        cell.font = red_font_bold
+                    # Highlight Arrear > 0 in red
+                    if col_num == max_col and str(cell.value) != '0' and str(cell.value) != 'N/A':
+                        cell.font = red_font_bold
+                    
+                    if col_num == 1:
+                        cell.font = Font(color="00B050", bold=True)
+                            
+            # Auto-adjust column widths
+            for col_num in range(1, max_col + 1):
+                col_letter = get_column_letter(col_num)
+                worksheet.column_dimensions[col_letter].width = 12
+            worksheet.column_dimensions['A'].width = 18
+
+            # --- PERFORMANCE ANALYSIS SECTION ---
+            start_row = 9 + len(df) + 2
+            
+            worksheet.merge_cells(f"A{start_row}:{max_col_letter}{start_row}")
+            cell = worksheet[f"A{start_row}"]
+            cell.value = "PERFORMANCE ANALYSIS - REGULAR STUDENTS ONLY"
+            cell.fill = orange_fill
+            cell.font = header_font
+            cell.alignment = center_align
+            cell.border = thin_border
+            
+            worksheet[f"A{start_row+1}"] = "Pass Percentage"
+            worksheet[f"B{start_row+1}"] = f"{dept_pass_percentage}%"
+            worksheet[f"A{start_row+2}"] = "Total Regular"
+            worksheet[f"B{start_row+2}"] = dept_total
+            worksheet[f"A{start_row+3}"] = "Total Passed"
+            worksheet[f"B{start_row+3}"] = dept_passed
+            worksheet[f"A{start_row+4}"] = "Total Failed"
+            worksheet[f"B{start_row+4}"] = dept_failed
+            
+            for r in range(start_row+1, start_row+5):
+                for c in ["A", "B"]:
+                    cell = worksheet[f"{c}{r}"]
+                    cell.border = thin_border
+                    cell.font = black_font
+                    if c == "A": cell.fill = header_fill; cell.font = header_font
+                    cell.alignment = center_align
+
+            # --- SUBJECT-WISE ANALYSIS SECTION ---
+            subj_start = start_row + 6
+            worksheet.merge_cells(f"A{subj_start}:{max_col_letter}{subj_start}")
+            cell = worksheet[f"A{subj_start}"]
+            cell.value = "SUBJECT-WISE ANALYSIS - REGULAR STUDENTS ONLY"
+            cell.fill = orange_fill
+            cell.font = header_font
+            cell.alignment = center_align
+            cell.border = thin_border
+            
+            subj_headers = ["SubCode", "Pass%", "Pass", "Fail", "S", "A+", "A", "B+", "B", "C+", "C", "D", "P", "F", "FE"]
+            for i, h in enumerate(subj_headers):
+                cell = worksheet.cell(row=subj_start+1, column=i+1)
+                cell.value = h
+                cell.fill = header_fill
+                cell.font = header_font
+                cell.alignment = center_align
+                cell.border = thin_border
+                
+            subject_stats = []
+            if not df.empty:
+                for idx, course in enumerate(courses):
+                    if course in df:
+                        course_grades = df[course].dropna()
+                        fails = course_grades.isin(['F', 'FE', 'Absent', 'Debarred', 'WITHHELD']).sum()
+                        passes = len(course_grades[~course_grades.isin(['F', 'FE', 'Absent', 'Debarred', 'WITHHELD', '-'])])
+                        total_valid = passes + fails
+                        pass_pct = round((passes / total_valid) * 100, 2) if total_valid > 0 else 0
+                        
+                        subject_stats.append({
+                            "subject": course,
+                            "passed": int(passes),
+                            "failed": int(fails)
+                        })
+                        
+                        r = subj_start + 2 + idx
+                        worksheet.cell(row=r, column=1, value=course)
+                        worksheet.cell(row=r, column=2, value=f"{pass_pct}%")
+                        worksheet.cell(row=r, column=3, value=passes)
+                        worksheet.cell(row=r, column=4, value=fails)
+                        
+                        grades = ['S', 'A+', 'A', 'B+', 'B', 'C+', 'C', 'D', 'P', 'F', 'FE']
+                        for g_idx, g in enumerate(grades):
+                            count = course_grades.isin([g]).sum()
+                            worksheet.cell(row=r, column=5+g_idx, value=count)
+                            
+                        # Format row
+                        for c_idx in range(1, len(subj_headers)+1):
+                            cell = worksheet.cell(row=r, column=c_idx)
+                            cell.alignment = center_align
+                            cell.border = thin_border
+
             stats_data.append({
                 "name": dept.title(),
                 "total": dept_total,
@@ -331,51 +566,173 @@ def extract_and_analyze(pdf_bytes: bytes):
                 "subjectStats": subject_stats
             })
 
-            cols = ['Student ID'] + courses + ['SGPA', 'Result']
-            df = df[cols]
-            df.to_excel(writer, sheet_name=dept[:31], index=False)
-    reg_excel.seek(0)
-    reg_base64 = base64.b64encode(reg_excel.read()).decode('utf-8')
+            # --- TOP 10 STUDENTS SECTION ---
+            top_start = subj_start + 2 + len(courses) + 2
+            worksheet.merge_cells(f"A{top_start}:C{top_start}")
+            cell = worksheet[f"A{top_start}"]
+            cell.value = "TOP 10 STUDENTS (REGULAR)"
+            cell.fill = orange_fill
+            cell.font = header_font
+            cell.alignment = center_align
+            cell.border = thin_border
+            
+            worksheet[f"A{top_start+1}"] = "Rank"
+            worksheet[f"B{top_start+1}"] = "Register No"
+            worksheet[f"C{top_start+1}"] = "SGPA"
+            for c in ["A", "B", "C"]:
+                cell = worksheet[f"{c}{top_start+1}"]
+                cell.fill = header_fill
+                cell.font = header_font
+                cell.alignment = center_align
+                cell.border = thin_border
+                
+            # Filter valid SGPA and sort
+            if not df.empty and 'SGPA' in df:
+                valid_sgpa = df[pd.to_numeric(df['SGPA'], errors='coerce').notnull()].copy()
+                valid_sgpa['numeric_sgpa'] = pd.to_numeric(valid_sgpa['SGPA'])
+                top_10 = valid_sgpa.sort_values(by='numeric_sgpa', ascending=False).head(10)
+                
+                curr_rank = 1
+                curr_row = top_start + 2
+                prev_sgpa = None
+                
+                for _, student in top_10.iterrows():
+                    sgpa = student['numeric_sgpa']
+                    if prev_sgpa is not None and sgpa < prev_sgpa:
+                        curr_rank += 1
+                    worksheet.cell(row=curr_row, column=1, value=curr_rank)
+                    worksheet.cell(row=curr_row, column=2, value=student['Student ID'])
+                    worksheet.cell(row=curr_row, column=3, value=f"{sgpa:.2f}")
+                    
+                    for c_idx in range(1, 4):
+                        cell = worksheet.cell(row=curr_row, column=c_idx)
+                        cell.alignment = center_align
+                        cell.border = thin_border
+                    
+                    prev_sgpa = sgpa
+                    curr_row += 1
 
-    # if there are supplementary students create separate workbook
+    excel_buffer.seek(0)
+    excel_base64 = base64.b64encode(excel_buffer.read()).decode('utf-8')
+
+    # ----- SUPPLEMENTARY WORKBOOK -----
     supp_base64 = None
-    if any(supp_dept.values()):
-        supp_excel = io.BytesIO()
-        with pd.ExcelWriter(supp_excel, engine='openpyxl') as writer:
+    supp_total = sum(len(v) for v in supp_dept.values())
+    
+    if supp_total > 0:
+        supp_buffer = io.BytesIO()
+        with pd.ExcelWriter(supp_buffer, engine='openpyxl') as writer:
             for dept, students in supp_dept.items():
                 if not students:
                     continue
                 df = pd.DataFrame(students)
-                # build column list: always include Student ID and any course cols,
-                # then append SGPA/Result only if they exist to avoid KeyErrors.
-                courses = [c for c in df.columns if c not in ['Student ID', 'Result', 'SGPA']]
-                cols = ['Student ID'] + courses
-                if 'SGPA' in df.columns:
-                    cols.append('SGPA')
-                if 'Result' in df.columns:
-                    cols.append('Result')
+                
+                base_cols = ['Student ID']
+                end_cols = ['SGPA', 'Arrear']
+                courses = [c for c in df.columns if c not in base_cols + end_cols + ['Result']]
+                for c in courses:
+                    if c not in df: df[c] = '-'
+                    else: df[c] = df[c].fillna('-')
+                
+                if 'SGPA' not in df: df['SGPA'] = 'N/A'
+                if 'Arrear' not in df: df['Arrear'] = 0
+                
+                df['SGPA'] = df['SGPA'].apply(lambda x: f"{x:.2f}" if isinstance(x, (int, float)) and x != 0 else 'N/A')
+                cols = base_cols + courses + end_cols
                 df = df[cols]
-                df.to_excel(writer, sheet_name=dept[:31], index=False)
-        supp_excel.seek(0)
-        supp_base64 = base64.b64encode(supp_excel.read()).decode('utf-8')
+                df = df.sort_values(by=['Student ID']).reset_index(drop=True)
+                
+                df.to_excel(writer, sheet_name=dept[:31], index=False, startrow=7)
+                worksheet = writer.sheets[dept[:31]]
+                
+                max_col = len(cols)
+                max_col_letter = get_column_letter(max_col)
+                
+                worksheet.merge_cells(f"A1:{max_col_letter}1")
+                cell = worksheet["A1"]
+                cell.value = "KTU RESULT ANALYSER - SUPPLEMENTARY"
+                cell.fill = header_fill
+                cell.font = Font(color="FFFFFF", bold=True, size=14)
+                cell.alignment = center_align
+                
+                worksheet.merge_cells(f"A2:{max_col_letter}2")
+                cell = worksheet["A2"]
+                cell.value = f"{exam_name} ({detected_scheme} Scheme) ({detected_semester} Result)"
+                cell.fill = green_fill
+                cell.font = black_font
+                cell.alignment = center_align
+                
+                worksheet.merge_cells(f"A3:{max_col_letter}3")
+                cell = worksheet["A3"]
+                cell.value = f"Department: {dept}"
+                cell.fill = yellow_fill
+                cell.font = black_font
+                cell.alignment = center_align
+                
+                worksheet.merge_cells(f"A4:{max_col_letter}4")
+                cell = worksheet["A4"]
+                cell.value = college_name
+                cell.fill = yellow_fill
+                cell.font = black_font
+                cell.alignment = center_align
+                
+                worksheet.merge_cells(f"A5:{max_col_letter}5")
+                cell = worksheet["A5"]
+                cell.value = f"Total Supplementary Students: {len(students)}"
+                cell.fill = yellow_fill
+                cell.font = black_font
+                cell.alignment = center_align
+                
+                worksheet.merge_cells(f"A6:{max_col_letter}6")
+                cell = worksheet["A6"]
+                cell.value = "Note: This sheet contains Backlog/Supplementary students only."
+                cell.font = red_font_italic
+                cell.alignment = center_align
+                
+                for col_num in range(1, max_col + 1):
+                    cell = worksheet.cell(row=8, column=col_num)
+                    if cell.value == "Student ID": cell.value = "Register No"
+                    cell.fill = header_fill
+                    cell.font = header_font
+                    cell.alignment = center_align
+                    cell.border = thin_border
+                    
+                fail_grades = ['F', 'FE', 'ABSENT', 'DEBARRED', 'I', 'WITHHELD']
+                for row_num in range(9, 9 + len(df)):
+                    for col_num in range(1, max_col + 1):
+                        cell = worksheet.cell(row=row_num, column=col_num)
+                        cell.alignment = center_align
+                        cell.border = thin_border
+                        val = str(cell.value).strip().upper()
+                        if val in fail_grades:
+                            cell.font = red_font_bold
+                        if col_num == max_col and str(cell.value) != '0' and str(cell.value) != 'N/A':
+                            cell.font = red_font_bold
+                        if col_num == 1:
+                             cell.font = Font(color="000000", bold=True)
+                             
+                for col_num in range(1, max_col + 1):
+                    col_letter = get_column_letter(col_num)
+                    worksheet.column_dimensions[col_letter].width = 12
+                worksheet.column_dimensions['A'].width = 18
+
+        supp_buffer.seek(0)
+        supp_base64 = base64.b64encode(supp_buffer.read()).decode('utf-8')
 
     overall_pass_percentage = round((total_passed / total_students) * 100, 2) if total_students > 0 else 0
 
     output = {
-        "excelBase64": reg_base64,
+        "excelBase64": excel_base64,
         "stats": {
             "totalStudents": total_students,
             "passPercentage": overall_pass_percentage,
             "departments": stats_data
         }
     }
-    # include supplementary workbook and summary if present
-    supp_total = sum(len(v) for v in supp_dept.values())
     if supp_base64:
         output["supplementaryExcelBase64"] = supp_base64
     if supp_total:
         output["supplementaryCount"] = supp_total
-    # also provide list of any courses for which we had no credit info
     if missing_credit_courses:
         output["missingCreditCourses"] = missing_credit_courses
     return output
