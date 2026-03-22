@@ -1706,6 +1706,347 @@
                     ]
                 }
             ]
+        },
+        {
+            "department_name": "Information Technology",
+            "semesters": [
+                {
+                    "semester": 1,
+                    "total_credit": 17,
+                    "courses": [
+                        {
+                            "course_code": "MAT 101",
+                            "credit": 4
+                        },
+                        {
+                            "course_code": "PHT 100",
+                            "credit": 4
+                        },
+                        {
+                            "course_code": "CYT 100",
+                            "credit": 4
+                        },
+                        {
+                            "course_code": "EST 100",
+                            "credit": 3
+                        },
+                        {
+                            "course_code": "EST 110",
+                            "credit": 3
+                        },
+                        {
+                            "course_code": "EST 120",
+                            "credit": 4
+                        },
+                        {
+                            "course_code": "EST 130",
+                            "credit": 4
+                        },
+                        {
+                            "course_code": "HUN 101",
+                            "credit": 2
+                        },
+                        {
+                            "course_code": "PHL 120",
+                            "credit": 1
+                        },
+                        {
+                            "course_code": "CYL 120",
+                            "credit": 1
+                        },
+                        {
+                            "course_code": "ESL 120",
+                            "credit": 1
+                        },
+                        {
+                            "course_code": "ESL 130",
+                            "credit": 1
+                        }
+                    ]
+                },
+                {
+                    "semester": 2,
+                    "total_credit": 21,
+                    "courses": [
+                        {
+                            "course_code": "MAT 102",
+                            "credit": 4
+                        },
+                        {
+                            "course_code": "PHT 100",
+                            "credit": 4
+                        },
+                        {
+                            "course_code": "CYT 100",
+                            "credit": 4
+                        },
+                        {
+                            "course_code": "EST 100",
+                            "credit": 3
+                        },
+                        {
+                            "course_code": "EST 110",
+                            "credit": 3
+                        },
+                        {
+                            "course_code": "EST 120",
+                            "credit": 4
+                        },
+                        {
+                            "course_code": "EST 130",
+                            "credit": 4
+                        },
+                        {
+                            "course_code": "HUN 102",
+                            "credit": 2
+                        },
+                        {
+                            "course_code": "EST 102",
+                            "credit": 4
+                        },
+                        {
+                            "course_code": "PHL 120",
+                            "credit": 1
+                        },
+                        {
+                            "course_code": "CYL 120",
+                            "credit": 1
+                        },
+                        {
+                            "course_code": "ESL 120",
+                            "credit": 1
+                        },
+                        {
+                            "course_code": "ESL 130",
+                            "credit": 1
+                        }
+                    ]
+                },
+                {
+                    "semester": 3,
+                    "total_credit": 22,
+                    "courses": [
+                        {
+                            "course_code": "MAT 203",
+                            "credit": 4
+                        },
+                        {
+                            "course_code": "ITT 201",
+                            "credit": 4
+                        },
+                        {
+                            "course_code": "ITT 203",
+                            "credit": 4
+                        },
+                        {
+                            "course_code": "ITT 205",
+                            "credit": 4
+                        },
+                        {
+                            "course_code": "EST 200",
+                            "credit": 2
+                        },
+                        {
+                            "course_code": "HUT 200",
+                            "credit": 2
+                        },
+                        {
+                            "course_code": "MCN 201",
+                            "credit": 0
+                        },
+                        {
+                            "course_code": "ITL 201",
+                            "credit": 2
+                        },
+                        {
+                            "course_code": "ITL 203",
+                            "credit": 2
+                        }
+                    ]
+                },
+                {
+                    "semester": 4,
+                    "total_credit": 22,
+                    "courses": [
+                        {
+                            "course_code": "MAT 206",
+                            "credit": 4
+                        },
+                        {
+                            "course_code": "ITT 202",
+                            "credit": 4
+                        },
+                        {
+                            "course_code": "ITT 204",
+                            "credit": 4
+                        },
+                        {
+                            "course_code": "ITT 206",
+                            "credit": 4
+                        },
+                        {
+                            "course_code": "EST 200",
+                            "credit": 2
+                        },
+                        {
+                            "course_code": "HUT 200",
+                            "credit": 2
+                        },
+                        {
+                            "course_code": "MCN 202",
+                            "credit": 0
+                        },
+                        {
+                            "course_code": "ITL 202",
+                            "credit": 2
+                        },
+                        {
+                            "course_code": "ITL 204",
+                            "credit": 2
+                        }
+                    ]
+                },
+                {
+                    "semester": 5,
+                    "total_credit": 23,
+                    "courses": [
+                        {
+                            "course_code": "ITT 301",
+                            "credit": 4
+                        },
+                        {
+                            "course_code": "ITT 303",
+                            "credit": 4
+                        },
+                        {
+                            "course_code": "ITT 305",
+                            "credit": 4
+                        },
+                        {
+                            "course_code": "ITT 307",
+                            "credit": 4
+                        },
+                        {
+                            "course_code": "ITT 309",
+                            "credit": 3
+                        },
+                        {
+                            "course_code": "MCN 301",
+                            "credit": 0
+                        },
+                        {
+                            "course_code": "ITL 331",
+                            "credit": 2
+                        },
+                        {
+                            "course_code": "ITL 333",
+                            "credit": 2
+                        }
+                    ]
+                },
+                {
+                    "semester": 6,
+                    "total_credit": 23,
+                    "courses": [
+                        {
+                            "course_code": "ITT 302",
+                            "credit": 4
+                        },
+                        {
+                            "course_code": "ITT 304",
+                            "credit": 4
+                        },
+                        {
+                            "course_code": "ITT 306",
+                            "credit": 4
+                        },
+                        {
+                            "course_code": "ITT XXX",
+                            "credit": 3
+                        },
+                        {
+                            "course_code": "HUT 300",
+                            "credit": 3
+                        },
+                        {
+                            "course_code": "ITT 308",
+                            "credit": 1
+                        },
+                        {
+                            "course_code": "ITL 332",
+                            "credit": 2
+                        },
+                        {
+                            "course_code": "ITD 334",
+                            "credit": 2
+                        }
+                    ]
+                },
+                {
+                    "semester": 7,
+                    "total_credit": 15,
+                    "courses": [
+                        {
+                            "course_code": "ITT 401",
+                            "credit": 3
+                        },
+                        {
+                            "course_code": "ITT XXX",
+                            "credit": 3
+                        },
+                        {
+                            "course_code": "ITT XXX",
+                            "credit": 3
+                        },
+                        {
+                            "course_code": "MCN 401",
+                            "credit": 0
+                        },
+                        {
+                            "course_code": "ITL 411",
+                            "credit": 2
+                        },
+                        {
+                            "course_code": "ITQ 413",
+                            "credit": 2
+                        },
+                        {
+                            "course_code": "ITD 415",
+                            "credit": 2
+                        }
+                    ]
+                },
+                {
+                    "semester": 8,
+                    "total_credit": 17,
+                    "courses": [
+                        {
+                            "course_code": "ITT 402",
+                            "credit": 3
+                        },
+                        {
+                            "course_code": "ITT XXX",
+                            "credit": 3
+                        },
+                        {
+                            "course_code": "ITT XXX",
+                            "credit": 3
+                        },
+                        {
+                            "course_code": "ITT XXX",
+                            "credit": 3
+                        },
+                        {
+                            "course_code": "ITT 404",
+                            "credit": 1
+                        },
+                        {
+                            "course_code": "ITD 416",
+                            "credit": 4
+                        }
+                    ]
+                }
+            ]
         }
     ]
 }

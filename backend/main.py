@@ -43,8 +43,8 @@ def get_course_credits(code: str, lookup: dict) -> int:
     if clean in lookup:
         return lookup[clean]
     for pattern, val in lookup.items():
-        if 'X' in pattern:
-            regex = "^" + pattern.replace("X", "[A-Z0-9]") + "$"
+        if 'X' in pattern or 'N' in pattern[-1:]:
+            regex = "^" + pattern.replace("X", "[A-Z0-9]").replace("N", "[A-Z0-9]") + "$"
             if re.match(regex, clean):
                 return val
     return 0
@@ -283,7 +283,7 @@ def extract_and_analyze(pdf_bytes: bytes):
                 for course, grade in student.items():
                     if course in ['Student ID', 'Result', 'SGPA']:
                         continue
-                    if grade in ['F', 'FE', 'Absent', 'Debarred', 'I']:
+                    if str(grade).upper() in ['F', 'FE', 'ABSENT', 'DEBARRED', 'I', 'WITHHELD']:
                         passed_all = False
                     gp = GRADE_POINTS.get(grade.upper(), 0)
                     creds = get_course_credits(course, credit_lookup)
@@ -379,16 +379,16 @@ def extract_and_analyze(pdf_bytes: bytes):
             # Format SGPA
             df['SGPA'] = df['SGPA'].apply(lambda x: f"{x:.2f}" if isinstance(x, (int, float)) and x != 0 else 'N/A')
             
+            # Analytics for Regular Students only
+            dept_total = len(df)
+            dept_passed = len(df[df['Result'] == 'PASS']) if not df.empty and 'Result' in df else 0
+            dept_failed = dept_total - dept_passed
+
             cols = base_cols + courses + end_cols
             df = df[cols]
             
             # Sort by Register Number
             df = df.sort_values(by=['Student ID']).reset_index(drop=True)
-            
-            # Analytics for Regular Students only
-            dept_total = len(df)
-            dept_passed = len(df[df['Result'] == 'PASS']) if not df.empty and 'Result' in df else 0
-            dept_failed = dept_total - dept_passed
             dept_pass_percentage = round((dept_passed / dept_total) * 100, 2) if dept_total > 0 else 0
             
             total_students += dept_total
@@ -529,8 +529,9 @@ def extract_and_analyze(pdf_bytes: bytes):
                 for idx, course in enumerate(courses):
                     if course in df:
                         course_grades = df[course].dropna()
-                        fails = course_grades.isin(['F', 'FE', 'Absent', 'Debarred', 'WITHHELD']).sum()
-                        passes = len(course_grades[~course_grades.isin(['F', 'FE', 'Absent', 'Debarred', 'WITHHELD', '-'])])
+                        course_grades_upper = course_grades.astype(str).str.upper()
+                        fails = course_grades_upper.isin(['F', 'FE', 'ABSENT', 'DEBARRED', 'I', 'WITHHELD']).sum()
+                        passes = len(course_grades_upper[~course_grades_upper.isin(['F', 'FE', 'ABSENT', 'DEBARRED', 'I', 'WITHHELD', '-'])])
                         total_valid = passes + fails
                         pass_pct = round((passes / total_valid) * 100, 2) if total_valid > 0 else 0
                         

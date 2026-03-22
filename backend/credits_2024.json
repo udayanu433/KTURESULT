@@ -313,7 +313,7 @@
                     "semester": 3,
                     "courses": [
                         {
-                            "code": "GYMAT301",
+                            "code": "GXMAT301",
                             "credits": 3
                         },
                         {
@@ -329,11 +329,7 @@
                             "credits": 4
                         },
                         {
-                            "code": "GAEST305",
-                            "credits": 4
-                        },
-                        {
-                            "code": "GNEST305",
+                            "code": "GXEST305",
                             "credits": 4
                         },
                         {
@@ -358,7 +354,7 @@
                     "semester": 4,
                     "courses": [
                         {
-                            "code": "GYMAT401",
+                            "code": "GXMAT401",
                             "credits": 3
                         },
                         {
