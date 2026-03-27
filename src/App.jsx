@@ -87,7 +87,7 @@ function App() {
         formData.append("file", file);
 
         try {
-            const response = await fetch(`${API_BASE_URL}/api/convert`, {
+            const response = await fetch(`https://kturesult-2htn.onrender.com/api/convert`, {
                 method: "POST",
                 body: formData,
             });
