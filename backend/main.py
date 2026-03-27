@@ -11,13 +11,13 @@ from collections import defaultdict
 # ---------- CONSTANTS & HELPERS ----------
 GRADE_POINTS = {
     'S': 10, 'A+': 9, 'A': 8.5, 'B+': 8, 'B': 7.5, 'C+': 7,
-    'C': 6.5, 'D': 6, 'P': 5.5, 'PASS': 5.5,
-    'F': 0, 'FE': 0, 'I': 0, 'ABSENT': 0, 'WITHHELD': 0
+    'C': 6.5, 'D': 6, 'P': 5.5, 'PASS': 10,
+    'F': 0, 'FE': 0, 'I': 0, 'ABSENT': 0, 'WITHHELD': 0, 'FAILED': 0, 'FAIL': 0
 }
 
-# register number regex: match PKD or LPKD prefix with two‑digit year,
+# register number regex: match 3-letter college prefix (optional L) with two‑digit year,
 # two letters dept code and three digits. used for filtering stray rows.
-REG_NO_PATTERN = re.compile(r'(L?PKD\d{2}[A-Z]{2}\d{3})')
+REG_NO_PATTERN = re.compile(r'(L?[A-Z]{3}\d{2}[A-Z]{2}\d{3})', re.IGNORECASE)
 COURSE_GRADE_PATTERN = re.compile(r'([A-Z]{3,}\d{3})\s*\(([^)]+)\)')
 
 
@@ -59,6 +59,10 @@ app.add_middleware(
     allow_methods=["*"],
     allow_headers=["*"],
 )
+@app.get("/")
+async def root():
+    return {"message": "Server is awake!"}
+
 
 def extract_and_analyze(pdf_bytes: bytes):
     departments_data = {}
@@ -91,6 +95,10 @@ def extract_and_analyze(pdf_bytes: bytes):
                     # Ignore lines that are definitely not departments
                     potential_dept = dept_match.group(1).strip()
                     if not potential_dept.startswith('APJ ABDUL KALAM') and not potential_dept.startswith('Exam Centre:'):
+                        if current_student:
+                            if department not in departments_data:
+                                departments_data[department] = []
+                            departments_data[department].append(current_student)
                         department = potential_dept
                         if department not in departments_data:
                             departments_data[department] = []
@@ -153,7 +161,7 @@ def extract_and_analyze(pdf_bytes: bytes):
 
         # helper to extract entry year from register number
         def extract_year(reg: str):
-            m = re.match(r'^L?PKD(\d{2})', reg, re.IGNORECASE)
+            m = re.match(r'^L?[A-Z]{3}(\d{2})', reg, re.IGNORECASE)
             if m:
                 return m.group(1)
             # fallback: look for any two-digit year at start
@@ -267,11 +275,11 @@ def extract_and_analyze(pdf_bytes: bytes):
                     courses_in_grp = [c for c in group if c in student]
                     if len(courses_in_grp) > 1:
                         # Check if passed at least one
-                        passed_any = any(str(student[c]).upper() not in ['F', 'FE', 'ABSENT', 'DEBARRED', 'I', 'WITHHELD'] for c in courses_in_grp)
+                        passed_any = any(str(student[c]).upper() not in ['F', 'FE', 'ABSENT', 'DEBARRED', 'I', 'WITHHELD', 'FAILED', 'FAIL'] for c in courses_in_grp)
                         if passed_any:
                             # Remove the failing ones so they don't count as arrear or fail the student
                             for c in courses_in_grp:
-                                if str(student[c]).upper() in ['F', 'FE', 'ABSENT', 'DEBARRED', 'I', 'WITHHELD']:
+                                if str(student[c]).upper() in ['F', 'FE', 'ABSENT', 'DEBARRED', 'I', 'WITHHELD', 'FAILED', 'FAIL']:
                                     del student[c]
 
         # Calculate Results Post-Extraction
@@ -283,34 +291,25 @@ def extract_and_analyze(pdf_bytes: bytes):
                 for course, grade in student.items():
                     if course in ['Student ID', 'Result', 'SGPA']:
                         continue
-                    if str(grade).upper() in ['F', 'FE', 'ABSENT', 'DEBARRED', 'I', 'WITHHELD']:
+                    if str(grade).upper() in ['F', 'FE', 'ABSENT', 'DEBARRED', 'I', 'WITHHELD', 'FAILED', 'FAIL']:
                         passed_all = False
+                    # Pass/Fail audit courses do not contribute to SGPA calculations
+                    if str(grade).upper() in ['PASS', 'FAILED', 'FAIL']:
+                        continue
+                        
                     gp = GRADE_POINTS.get(grade.upper(), 0)
                     creds = get_course_credits(course, credit_lookup)
                     if creds == 0:
                         missing_credit_courses[course] += 1
                     total_weighted += creds * gp
-                    # 2019: include ALL courses in denominator (per official formula)
-                    # 2024: only count passed courses for the denominator
-                    if detected_scheme == "2019":
-                        total_creds += creds
-                    else:
-                        if grade not in ['F', 'FE', 'Absent', 'Debarred', 'I']:
-                            total_creds += creds
+                    total_creds += creds
+                    
                 # account for special 2024 S2 extra credit/activity
                 if detected_scheme == "2024" and detected_semester == "S2":
                     total_creds += 1
                     total_weighted += 1 * 5.5
-                # use different denominators based on scheme
-                if detected_scheme == "2019":
-                    # 2019 formula: SGPA = Σ(Ci×GPi)/ΣCi (sum of all course credits)
-                    sgpa_denom = total_creds if total_creds > 0 else 1
-                else:
-                    # 2024: use official semester total
-                    sgpa_denom = (
-                        24 if detected_semester == "S2"
-                        else semester_totals.get(semester_key, 21)
-                    )
+                    
+                sgpa_denom = total_creds if total_creds > 0 else 1
                 sgpa = round(total_weighted / sgpa_denom, 2) if sgpa_denom else 0
                 student['SGPA'] = sgpa
                 student['Result'] = 'PASS' if passed_all else 'FAIL'
@@ -328,7 +327,7 @@ def extract_and_analyze(pdf_bytes: bytes):
             for course, grade in student.items():
                 if course in ['Student ID', 'Result', 'SGPA', 'Arrear']:
                     continue
-                if str(grade).upper() in ['F', 'FE', 'ABSENT', 'DEBARRED', 'I', 'WITHHELD']:
+                if str(grade).upper() in ['F', 'FE', 'ABSENT', 'DEBARRED', 'I', 'WITHHELD', 'FAILED', 'FAIL']:
                     arrear_count += 1
             student['Arrear'] = arrear_count
 
@@ -455,7 +454,7 @@ def extract_and_analyze(pdf_bytes: bytes):
                 cell.border = thin_border
                 
             # Format Data Rows (Row 9 onwards)
-            fail_grades = ['F', 'FE', 'ABSENT', 'DEBARRED', 'I', 'WITHHELD']
+            fail_grades = ['F', 'FE', 'ABSENT', 'DEBARRED', 'I', 'WITHHELD', 'FAILED', 'FAIL']
             for row_num in range(9, 9 + len(df)):
                 for col_num in range(1, max_col + 1):
                     cell = worksheet.cell(row=row_num, column=col_num)
@@ -515,7 +514,7 @@ def extract_and_analyze(pdf_bytes: bytes):
             cell.alignment = center_align
             cell.border = thin_border
             
-            subj_headers = ["SubCode", "Pass%", "Pass", "Fail", "S", "A+", "A", "B+", "B", "C+", "C", "D", "P", "F", "FE"]
+            subj_headers = ["SubCode", "Pass%", "Pass", "Fail", "S", "A+", "A", "B+", "B", "C+", "C", "D", "P", "PASS", "F", "FE", "FAILED"]
             for i, h in enumerate(subj_headers):
                 cell = worksheet.cell(row=subj_start+1, column=i+1)
                 cell.value = h
@@ -530,8 +529,8 @@ def extract_and_analyze(pdf_bytes: bytes):
                     if course in df:
                         course_grades = df[course].dropna()
                         course_grades_upper = course_grades.astype(str).str.upper()
-                        fails = course_grades_upper.isin(['F', 'FE', 'ABSENT', 'DEBARRED', 'I', 'WITHHELD']).sum()
-                        passes = len(course_grades_upper[~course_grades_upper.isin(['F', 'FE', 'ABSENT', 'DEBARRED', 'I', 'WITHHELD', '-'])])
+                        fails = course_grades_upper.isin(['F', 'FE', 'ABSENT', 'DEBARRED', 'I', 'WITHHELD', 'FAILED', 'FAIL']).sum()
+                        passes = len(course_grades_upper[~course_grades_upper.isin(['F', 'FE', 'ABSENT', 'DEBARRED', 'I', 'WITHHELD', 'FAILED', 'FAIL', '-'])])
                         total_valid = passes + fails
                         pass_pct = round((passes / total_valid) * 100, 2) if total_valid > 0 else 0
                         
@@ -547,7 +546,7 @@ def extract_and_analyze(pdf_bytes: bytes):
                         worksheet.cell(row=r, column=3, value=passes)
                         worksheet.cell(row=r, column=4, value=fails)
                         
-                        grades = ['S', 'A+', 'A', 'B+', 'B', 'C+', 'C', 'D', 'P', 'F', 'FE']
+                        grades = ['S', 'A+', 'A', 'B+', 'B', 'C+', 'C', 'D', 'P', 'PASS', 'F', 'FE', 'FAILED']
                         for g_idx, g in enumerate(grades):
                             count = course_grades.isin([g]).sum()
                             worksheet.cell(row=r, column=5+g_idx, value=count)
@@ -612,6 +611,114 @@ def extract_and_analyze(pdf_bytes: bytes):
                     
                     prev_sgpa = sgpa
                     curr_row += 1
+
+        # --- DASHBOARD GENERATION ---
+        if stats_data:
+            from openpyxl.chart import PieChart, BarChart, Reference
+            
+            dash_df = pd.DataFrame([{
+                'Department': d['name'][:31],
+                'Total Students': d['total'],
+                'Passed': d['passed'],
+                'Failed': d['failed'],
+                'Pass Percentage (%)': d['passPercentage']
+            } for d in stats_data])
+            
+            dash_df.to_excel(writer, sheet_name="Dashboard", index=False, startrow=8)
+            workbook = writer.book
+            dash_sheet = writer.sheets["Dashboard"]
+            
+            # Move Dashboard to front
+            idx = workbook.sheetnames.index("Dashboard")
+            sheet = workbook.worksheets.pop(idx)
+            workbook.worksheets.insert(0, sheet)
+            
+            # Beautify Dashboard Data Table
+            dash_sheet.merge_cells("A1:E1")
+            dash_sheet["A1"].value = "RESULTS DASHBOARD"
+            dash_sheet["A1"].fill = header_fill
+            dash_sheet["A1"].font = Font(color="FFFFFF", bold=True, size=16)
+            dash_sheet["A1"].alignment = center_align
+
+            dash_sheet.merge_cells("A2:E2")
+            dash_sheet["A2"].value = f"{exam_name} ({detected_scheme} Scheme) ({detected_semester} Result)"
+            dash_sheet["A2"].fill = green_fill
+            dash_sheet["A2"].font = black_font
+            dash_sheet["A2"].alignment = center_align
+            
+            dash_sheet.merge_cells("A3:E3")
+            dash_sheet["A3"].value = college_name
+            dash_sheet["A3"].fill = yellow_fill
+            dash_sheet["A3"].font = black_font
+            dash_sheet["A3"].alignment = center_align
+
+            # Overall Stats
+            dash_sheet["A5"].value = "Overall Statistics"
+            dash_sheet["A5"].font = Font(bold=True)
+            dash_sheet["A6"].value = "Total Regular Students:"
+            dash_sheet["B6"].value = total_students
+            dash_sheet["A7"].value = "Total Passed:"
+            dash_sheet["B7"].value = total_passed
+            dash_sheet["A8"].value = "Overall Pass %:"
+            overall_pass = round((total_passed/total_students)*100, 2) if total_students > 0 else 0
+            dash_sheet["B8"].value = f"{overall_pass}%"
+            
+            # Format Data Table (Row 9 is Headers)
+            for col_num in range(1, 6):
+                cell = dash_sheet.cell(row=9, column=col_num)
+                cell.fill = header_fill
+                cell.font = header_font
+                cell.alignment = center_align
+                cell.border = thin_border
+                dash_sheet.column_dimensions[get_column_letter(col_num)].width = 20
+
+            for row_num in range(10, 10 + len(dash_df)):
+                for col_num in range(1, 6):
+                    cell = dash_sheet.cell(row=row_num, column=col_num)
+                    cell.alignment = center_align
+                    cell.border = thin_border
+
+            # Create Pie Chart for Pass/Fail
+            chart_data_row = 10 + len(dash_df) + 3
+            dash_sheet.cell(row=chart_data_row, column=1, value="Status")
+            dash_sheet.cell(row=chart_data_row, column=2, value="Count")
+            dash_sheet.cell(row=chart_data_row+1, column=1, value="Passed")
+            dash_sheet.cell(row=chart_data_row+1, column=2, value=total_passed)
+            dash_sheet.cell(row=chart_data_row+2, column=1, value="Failed")
+            dash_sheet.cell(row=chart_data_row+2, column=2, value=total_students - total_passed)
+            
+            # Hide the chart data text by making font white
+            for row_num in range(chart_data_row, chart_data_row+3):
+                for col_num in range(1, 3):
+                    dash_sheet.cell(row=row_num, column=col_num).font = Font(color="FFFFFF")
+
+            pie = PieChart()
+            pie.title = "Overall Result Distribution"
+            cats = Reference(dash_sheet, min_col=1, min_row=chart_data_row+1, max_row=chart_data_row+2)
+            data = Reference(dash_sheet, min_col=2, min_row=chart_data_row, max_row=chart_data_row+2)
+            pie.add_data(data, titles_from_data=True)
+            pie.set_categories(cats)
+            pie.width = 12
+            pie.height = 8
+            dash_sheet.add_chart(pie, "G2")
+
+            # Create Bar Chart for Department Pass %
+            bar = BarChart()
+            bar.type = "col"
+            bar.title = "Department Pass Percentage (%)"
+            bar.y_axis.title = "Pass %"
+            bar.x_axis.title = "Department"
+            bar.y_axis.scaling.max = 100
+            bar.y_axis.scaling.min = 0
+
+            data_ref = Reference(dash_sheet, min_col=5, min_row=9, max_row=9+len(dash_df))
+            cats_ref = Reference(dash_sheet, min_col=1, min_row=10, max_row=9+len(dash_df))
+            bar.add_data(data_ref, titles_from_data=True)
+            bar.set_categories(cats_ref)
+            bar.legend = None
+            bar.width = 16
+            bar.height = 9
+            dash_sheet.add_chart(bar, "G18")
 
     excel_buffer.seek(0)
     excel_base64 = base64.b64encode(excel_buffer.read()).decode('utf-8')
@@ -698,7 +805,7 @@ def extract_and_analyze(pdf_bytes: bytes):
                     cell.alignment = center_align
                     cell.border = thin_border
                     
-                fail_grades = ['F', 'FE', 'ABSENT', 'DEBARRED', 'I', 'WITHHELD']
+                fail_grades = ['F', 'FE', 'ABSENT', 'DEBARRED', 'I', 'WITHHELD', 'FAILED', 'FAIL']
                 for row_num in range(9, 9 + len(df)):
                     for col_num in range(1, max_col + 1):
                         cell = worksheet.cell(row=row_num, column=col_num)

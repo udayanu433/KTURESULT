@@ -1,7 +1,7 @@
 import { useState, useRef, useCallback, useEffect } from 'react'
 import Dashboard from './components/Dashboard'
 import './App.css'
-
+const API_BASE_URL = import.meta.env.VITE_API_BASE_URL || "http://localhost:8000";
 function App() {
     const [isDragging, setIsDragging] = useState(false)
     const [file, setFile] = useState(null)
